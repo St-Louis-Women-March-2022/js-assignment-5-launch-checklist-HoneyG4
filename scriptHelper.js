@@ -18,31 +18,23 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
         ;
     }
   
-  
-  
-  
-  
-  
-  
-  
+
   
   
   
     
 function validateInput(testInput) {
     if (testInput ==="") {
-       alert("Empty")
+       return("Empty")
     }
-    if (isNaN(value)){
-        alert("Not A Number")
+    if (isNaN(testInput)){
+        return("Not A Number")
     }
-    else if{
-       alert("Is a Number")
+    
+    else { (!isNaN(testInput))
+  return("Is a Number")
     }
-    else {
-
-
-    }
+    
     }
     
  
@@ -51,12 +43,22 @@ function validateInput(testInput) {
 
 
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
-    let launchStatus = document.getElementById('launchStatus')
-    let pilotStatus = document.getElementById("pilotStatus")
-    let copilotStatus = document.getElementById("copilotStatus")
-    let fuelLevel= document.getElementById('fuelStatus')
-    let  cargoLevel = document.getElementById('cargoStatus')
-    const list = document.querySelector('#faultyItems')
+    const launchStatus = document.getElementById('launchStatus')
+    const pilotStatus = document.getElementById("pilotStatus")
+    const copilotStatus = document.getElementById("copilotStatus")
+    fuelLevel= document.getElementById('fuelStatus')
+    cargoLevel = document.getElementById('cargoStatus')
+    pilot = document.querySelector("[name=pilotName]").value;
+    copilot =document.querySelector("[name=copilotName]").value;
+    list = document.getElementById('faultyItems');
+
+    if (validateInput(pilot) === "Is a Number" || validateInput(copilot) === "Is a Number") {
+        alert("Make sure to enter valid information for each field!")
+    } else if (validateInput(fuelLevel) === "Not a Number" || validateInput(cargoLevel) === "Not a Number") {
+        alert("Make sure to enter valid information for each field!")
+    }
+        else{
+   
     launchStatus.innerHTML += `
     <div>
         <ol>
@@ -94,21 +96,24 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
             </ol>
         </div>
         `; 
-
-
-   
+    }
 }
 
 async function myFetch() {
     let planetsReturned;
 
-    planetsReturned = await fetch().then( function(response) {
+    planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) { response.json().then(function(planetsReturned){
+        return planetsReturned  ;
+    })
+    
         });
 
-    return planetsReturned;
+  
 }
 
 function pickPlanet(planets) {
+ let index = Math.floor(Math.random() * planets.length)
+    return planets[index];
 }
 
 module.exports.addDestinationInfo = addDestinationInfo;
