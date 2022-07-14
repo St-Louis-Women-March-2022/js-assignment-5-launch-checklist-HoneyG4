@@ -34,9 +34,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     }
 
 
-
    function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
-
 
     if (validateInput(pilot) === "Empty" || validateInput(copilot) === "Empty"){
         alert("All fields must contain input")
@@ -54,28 +52,28 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
          <ol> 
          `
           pilotStatus.innerHTML = `Pilot ${pilot} Ready`;
-            copilotStatus.innerHTML = `CoPilot ${copilot} Ready`;
+         copilotStatus.innerHTML = `CoPilot ${copilot} Ready`;
            
            if (fuelLevel <= 10000 ){
-         list.style.visibility = `visible`;
+          list.style.visibility = `visible`;
           launchStatus.innerHTML = `Shuttle not ready for launch`;
           launchStatus.style.color = `red`;
           fuelStatus.innerHTML = `Fuel level too low for launch`
            }
        
-        else if (cargoLevel >= 10000) {
-             list.style.visibility = `visible`;
+         if (cargoLevel >= 10000) {
+            list.style.visibility = `visible`;
             launchStatus.innerHTML = `Shuttle not ready for launch`;
-             launchStatus.style.color = `red`;
-              cargoStatus.innerHTML = `Cargo mass over capacity for launch`;
+           launchStatus.style.color = `red`;
+           cargoStatus.innerHTML = `Cargo mass over capacity for launch`;
             }   
       
-         else if (cargoLevel<= 10000 && fuelLevel >= 10000) {
-         list.style.visibility = `visible`;
+         if (cargoLevel<= 10000 && fuelLevel >= 10000) {
+          list.style.visibility = `visible`;
           launchStatus.innerHTML = `Shuttle is ready for launch`;
           launchStatus.style.color = `green`;
-                 cargoStatus.innerHTML = `Cargo mass low enough for launch`;
-                   fuelStatus.innerHTML = `Fuel level high enough for launch`;
+          cargoStatus.innerHTML = `Cargo mass low enough for launch`;
+          fuelStatus.innerHTML = `Fuel level high enough for launch`;
         }    
                `
              </ol>
@@ -90,8 +88,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
 
     planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) { 
      return response.json()
-
-         
+   
     })
     return planetsReturned 
     };
